@@ -13,7 +13,7 @@ MENU_RELATORIOS = """Relatórios
 0 - Sair
 """
 
-MENU_ENTIDADES = """Opções:
+MENU_ENTIDADES = """Entidades
 1 - MARCAÇÕES
 2 - FUNCIONÁRIOS
 0 - Sair
@@ -21,7 +21,7 @@ MENU_ENTIDADES = """Opções:
 
 QUERY_COUNT = 'select count(1) as total_{tabela} from {tabela}'
 
-def clear_console(wait_time:int=3):
+def clear_console(wait_time: int = 3):
     import os
     from time import sleep
     sleep(wait_time)
