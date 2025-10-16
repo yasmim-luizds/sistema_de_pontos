@@ -12,11 +12,11 @@ ctrl_marcacao = Controller_Marcacao()
 
 def reports(opcao_relatorio: int = 0):
     if opcao_relatorio == 1:
-        relatorio.get_relatorio_pontos_funcionarios()
+        relatorio.get_relatorio_funcionarios()
     elif opcao_relatorio == 2:
         relatorio.get_relatorio_marcacao()
     elif opcao_relatorio == 3:
-        relatorio.get_relatorio_funcionarios()
+        relatorio.get_relatorio_pontos_funcionarios()
 
 
 def inserir(opcao_inserir: int = 0):

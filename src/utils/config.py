@@ -7,9 +7,9 @@ MENU_PRINCIPAL = """Menu Principal
 """
 
 MENU_RELATORIOS = """Relatórios
-1 - Relatório de Marcações de ponto por Funcionários
+1 - Relatório de Funcionários
 2 - Relatório de Marcações de ponto
-3 - Relatório de Funcionários
+3 - Relatório de Marcações de ponto por Funcionários
 0 - Sair
 """
 
