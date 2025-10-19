@@ -31,7 +31,7 @@ def generate_records(query: str, sep: str = ';'):
                 print(f"Error inserting record: {e}")
 
 def run():
-    # scripts certos do projeto de pontos
+    # todos os arquivos SQL estão fora da pasta src
     with open("../sql/create_tables.sql") as f:
         query_create = f.read()
 

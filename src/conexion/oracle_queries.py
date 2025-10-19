@@ -21,13 +21,14 @@ class OracleQueries:
         self.port = 1521
         self.service_name = 'XEPDB1'
         self.sid = 'XE'
+        self.user = 'system'
+        self.passwd = 'oracle'
+        self.cur = None
 
         with open("conexion/passphrase/authentication.oracle", "r") as f:
             self.user, self.passwd = f.read().split(',')            
 
-    def __del__(self):
-        if self.cur:
-            self.close()
+   
 
     def connectionString(self, in_container:bool=False):
         '''
@@ -68,6 +69,10 @@ class OracleQueries:
                                      )
         self.cur = self.conn.cursor()
         return self.cur
+    
+    def __del__(self):
+        if self.cur:
+            self.close()
 
     def sqlToDataFrame(self, query:str) -> DataFrame:
         '''
