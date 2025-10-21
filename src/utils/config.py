@@ -19,7 +19,9 @@ MENU_ENTIDADES = """Entidades
 0 - Sair
 """
 
-QUERY_COUNT = 'select count(1) as total_{tabela} from {tabela}'
+# Consulta de contagem com schema explícito e alias configurável
+# Use com: QUERY_COUNT.format(alias="total_marcacoes", table="MARCACOES")
+QUERY_COUNT = "SELECT COUNT(1) AS {alias} FROM LABDATABASE.{table}"
 
 def clear_console(wait_time: int = 3):
     import os

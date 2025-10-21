@@ -30,7 +30,7 @@ class OracleQueries:
 
    
 
-    def connectionString(self, in_container:bool=False):
+    def connectionString(self, in_container:bool=True):
         '''
         Esse método cria uma string de conexão utilizando os parâmetros necessários
         Parameters:

@@ -1,13 +1,16 @@
-# utils/splash_screen.py
 from conexion.oracle_queries import OracleQueries
 from utils import config
 
 class SplashScreen:
 
     def __init__(self):
-        # Consultas de contagem de registros - início
-        self.qry_total_marcacoes   = config.QUERY_COUNT.format(tabela="marcacao")
-        self.qry_total_funcionarios = config.QUERY_COUNT.format(tabela="funcionario")
+        # Consultas de contagem de registros - início (com schema + alias corretos)
+        self.qry_total_marcacoes = config.QUERY_COUNT.format(
+            alias="total_marcacoes", table="MARCACOES"
+        )
+        self.qry_total_funcionarios = config.QUERY_COUNT.format(
+            alias="total_funcionarios", table="FUNCIONARIOS"
+        )
         # Consultas de contagem de registros - fim
 
         self.created_by = "Hellen Karla Costa Campos de Melo, Julia Ogassavara Maia e Yasmim Luiz dos Santos"
