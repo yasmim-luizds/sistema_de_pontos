@@ -205,9 +205,13 @@ class Controller_Marcacao:
         oracle = OracleQueries(can_write=True)
         oracle.connect()
 
-        id_marc = int(input("ID da Marcação (período) que irá excluir: "))
+        try:
+            id_marc = int(input("ID da Marcação (período) que irá excluir: "))
+        except ValueError:
+            print("Entrada inválida.")
+            return
 
-        if not self.verifica_existencia_marcacao(oracle, id_marc):  # False se existe
+        if not self.verifica_existencia_marcacao(oracle, id_marc):
             df = oracle.sqlToDataFrame(f"""
                 SELECT
                     CODIGO_MARCACAO                      AS id_marc,
@@ -219,11 +223,10 @@ class Controller_Marcacao:
                 WHERE CODIGO_MARCACAO = {id_marc}
             """)
 
-            oracle.write(f"""
-                DELETE FROM LABDATABASE.MARCACOES
-                 WHERE CODIGO_MARCACAO = {id_marc}
-            """)
+            # Apague antes de imprimir, como você já fazia
+            oracle.write(f"DELETE FROM LABDATABASE.MARCACOES WHERE CODIGO_MARCACAO = {id_marc}")
 
+            # Sempre imprime a ENTRADA
             marc_E = Marcacao(
                 id_marc=df.id_marc.values[0],
                 id_func=df.id_func.values[0],
@@ -231,19 +234,26 @@ class Controller_Marcacao:
                 hora_marc=df.hora_ent.values[0],
                 tipo="E"
             )
-            marc_S = Marcacao(
-                id_marc=df.id_marc.values[0],
-                id_func=df.id_func.values[0],
-                data_marc=df.data_marc.values[0],
-                hora_marc=df.hora_sai.values[0],
-                tipo="S"
-            )
 
             print("Período removido com sucesso!")
             print("  ", marc_E.to_string())
-            print("  ", marc_S.to_string())
+
+            # Só imprime a SAÍDA se houver hora
+            hora_sai = df.hora_sai.values[0]
+            if hora_sai is not None and str(hora_sai).strip():
+                marc_S = Marcacao(
+                    id_marc=df.id_marc.values[0],
+                    id_func=df.id_func.values[0],
+                    data_marc=df.data_marc.values[0],
+                    hora_marc=hora_sai,
+                    tipo="S"
+                )
+                print("  ", marc_S.to_string())
+            else:
+                print("  (sem saída registrada)")
         else:
             print(f"O id_marc {id_marc} não existe.")
+
 
     def verifica_existencia_marcacao(self, oracle: OracleQueries, id_marc: int) -> bool:
         df = oracle.sqlToDataFrame(f"""
