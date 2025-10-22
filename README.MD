@@ -5,6 +5,7 @@
 **Instituição:** FAESA  
 **Última atualização:** Outubro/2025  
 **Vídeo de Apresentação: https://youtu.be/FCXpp0ONjVg**
+
 **Integrantes: Hellen Karla Costa, Júlia Ogassavara e Yasmim Luiz**
 **Turma: 4SC1**
 ---
